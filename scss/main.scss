@@ -1,0 +1,262 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Bebas+Neue|Kalam&display=swap');
+$ff-kalam: 'Kalam', cursive;
+$ff-bebas: 'Bebas Neue', cursive;
+
+// Colors:
+$grey: #333;
+$reds: (
+red: red,
+dark-red: #5C1D25,
+);
+
+$blues : (
+dark-blue: #04153c,
+light-blue: rgb(55, 90, 143),
+);
+
+// Breakepoints
+$breakepoints: (
+small: 600px,
+medium: 860px,
+large: 1349px,
+);
+
+// Color functions and mixins
+@function clrBlue($shade) {
+$value: map-get($blues, $shade);
+@return $value;
+}
+
+@function clrRed($shade) {
+$value: map-get($reds, $shade);
+@return $value;
+}
+
+@mixin mq($size) {
+    @if map-has-key($breakepoints, $size) {
+        $breakepoint: map-get($breakepoints, $size);
+        @media (min-width: $breakepoint) {
+        @content;
+        }
+        }
+        @else if type-of($size) == number and not unitless($size) {
+        @media (min-width: $size) {
+        @content;
+        } }
+        @else {
+        @error "this map doesn't have #{$size} map key or is unitless"
+}
+}
+
+
+// Styles
+
+body {
+padding: 0;
+margin: 0;
+min-height: 100vh;
+overflow-x: hidden;
+font-family: $ff-kalam !important;
+background: linear-gradient(to right, #dae2f8, #d6a4a4) !important;
+background-repeat: no-repeat;
+
+@include mq(small) {
+background: rgb(228, 227, 227) !important; 
+}
+}
+
+.borderContainer {
+position: relative;
+width: auto;
+margin: 0 auto;
+min-height: 100vh;
+
+@include mq(small) {
+width: 750px;
+}
+}
+
+img {
+max-width: 100%;
+}
+
+
+.title__img {
+position: absolute;
+right: 50%;
+top: 135px;
+transform: translateX(50%);
+width: 150px;
+margin: .2em auto;
+z-index: 5;
+
+
+@include mq(medium) {
+top: 230px;
+}
+}
+
+.gooble {
+position: absolute;
+left: 50%;
+transform: translateX(-50%);
+top: 210px;
+font-size: 1.4rem;
+font-weight: bold;
+transform: rotate(-10deg);
+z-index: 10;
+font-family: $ff-bebas;
+letter-spacing: 3px;
+
+@include mq(medium) {
+top: 300px;
+}
+}
+
+.twilek {
+position: absolute;
+display: none;
+right: 0;
+top: 4.3rem;
+
+@include mq(small) {
+display: block;
+width: 450px;
+height: 490px;
+}
+}
+
+#vader  {
+display: none;
+@include mq(medium) {
+display: block;
+width: 900px;
+height: 600px;
+position: absolute;
+left: 48%;
+transform: translateX(-50%);
+
+& #Sword_1 {
+animation: sword 8000ms ease-in-out infinite ;
+}
+
+& #ring {
+animation: move 15s ease-in-out infinite; 
+animation-delay: 100ms;
+}
+}
+}
+
+.output {
+position: absolute;
+min-width: 300px;
+left: 50%;
+transform: translateX(-50%);
+top: 200px;
+border: 1px solid rgba(0, 0, 0, .7);
+background: rgba(0, 0, 0, .5);
+padding: 2rem 1.5rem;
+
+@include mq(small) {
+min-width: 500px;
+}
+@include mq(medium) {
+width: 500px;
+top: 300px;
+}
+}
+
+.custom-select {
+-webkit-appearance: none;
+}
+
+.card-body {
+h4 {
+font-size: 1em !important;
+color: clrRed(dark-red);
+font-weight: bold !important;
+}
+
+span {
+font-size: .8rem;
+color: black;
+font-weight: bold;
+}
+}
+
+.social {
+position: absolute;
+left: 1.5rem;
+padding-top: 1rem 0;
+bottom: 0;
+
+& i {
+color: $grey;
+transition: color 500ms ease;
+font-size: 1.2rem;
+padding-right: .5rem;
+&:hover {
+color: black;
+}
+}
+}
+
+
+// Animating svg
+@keyframes sword {
+0% {
+fill: clrRed(dark-red);
+}
+50%  {
+fill: clrRed(red);
+}
+100%{
+fill: clrRed(dark-red);
+}
+}
+    
+@keyframes swordTwo {
+0% {
+fill: clrBlue(dark-blue);
+}
+50%  {
+fill: clrBlue(light-blue);
+}
+100%{
+fill: clrBlue(dark-blue);
+}
+}
+    
+    
+@keyframes move {
+0% {
+fill: initial;
+}
+50% {
+fill: clrRed(red);
+transform: translateX(-6px);  
+}
+100% {
+fill: black;
+}
+}
+
+    
+@keyframes eye {
+0% {
+transform: translateX(-2px);
+}
+50%  {
+transform: translateX(-4px);    
+}
+100%{
+transform: translateX(-2px);
+}
+}
+
+
+
+@import "vendor/bootstrap";
+
+
