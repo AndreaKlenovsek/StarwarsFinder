@@ -35,7 +35,7 @@ img {
     .title__img {
       top: 230px; } }
 
-.gooble {
+.boogle {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
@@ -47,7 +47,7 @@ img {
   font-family: "Bebas Neue", cursive;
   letter-spacing: 3px; }
   @media (min-width: 860px) {
-    .gooble {
+    .boogle {
       top: 300px; } }
 
 .twilek {
